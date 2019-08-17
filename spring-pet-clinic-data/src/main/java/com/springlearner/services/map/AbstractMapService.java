@@ -1,15 +1,23 @@
 package com.springlearner.services.map;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import com.springlearner.model.BaseEntity;
 
-public abstract class AbstractMapService<T, ID> {
+import java.util.*;
 
-    HashMap<ID,T> hashMap=new HashMap();
+public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> {
 
-    T save(ID id,T object){
-        hashMap.put(id,object);
+    HashMap<Long,T> hashMap=new HashMap();
+
+    T save(T object){
+
+        if(object != null){
+            if(object.getId() == null)
+                object.setId(getNextId());
+            hashMap.put(object.getId(),object);
+        }else{
+            throw new RuntimeException("Object can not be null");
+        }
+
         return object;
     }
 
@@ -27,5 +35,19 @@ public abstract class AbstractMapService<T, ID> {
 
     void delete(T object){
         hashMap.entrySet().removeIf(entry ->entry.getValue().equals(object) );
+    }
+
+    Long getNextId(){
+
+        Long nextId=null;
+
+       try{
+            nextId=Collections.max(hashMap.keySet()) +1;
+        }
+       catch(NoSuchElementException e){
+           nextId=1L;
+       }
+         return nextId;
+
     }
 }
