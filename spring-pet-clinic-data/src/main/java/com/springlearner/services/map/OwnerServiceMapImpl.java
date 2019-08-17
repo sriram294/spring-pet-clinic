@@ -2,9 +2,11 @@ package com.springlearner.services.map;
 
 import com.springlearner.model.Owner;
 import com.springlearner.services.OwnerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class OwnerServiceMapImpl extends AbstractMapService<Owner,Long> implements OwnerService {
 
 
