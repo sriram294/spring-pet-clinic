@@ -1,11 +1,11 @@
 package com.springlearner.services.map;
 
 import com.springlearner.model.Owner;
-import com.springlearner.services.CrudService;
+import com.springlearner.services.OwnerService;
 
 import java.util.Set;
 
-public class OwnerServiceMapImpl extends AbstractMapService<Owner,Long> implements CrudService<Owner,Long> {
+public class OwnerServiceMapImpl extends AbstractMapService<Owner,Long> implements OwnerService {
 
 
     @Override
@@ -32,5 +32,10 @@ public class OwnerServiceMapImpl extends AbstractMapService<Owner,Long> implemen
     @Override
     public Owner findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 }
